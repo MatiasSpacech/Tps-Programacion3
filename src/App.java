@@ -9,10 +9,12 @@ public class App {
         try {
             int piezasAProducir = 0;
             ArrayList<Maquina> maquinas = new ArrayList<>();
-            List<String> lines = Files.readAllLines(Paths.get("src/entrada.txt"));
-            piezasAProducir = Integer.parseInt(lines.get(0));
+            List<String> lines = Files.readAllLines(Paths.get("src/entrada.txt"));// Guardo todas los renglones del
+                                                                                  // archivo
+            piezasAProducir = Integer.parseInt(lines.get(0));// Selecciono el primero (indice 0)
 
-            for (int i = 1; i < lines.size(); i++) {
+            for (int i = 1; i < lines.size(); i++) {// por cada linea a partir del la segunda (indice 1) creo una
+                                                    // maquina
                 String[] cadenas = lines.get(i).split(",");
                 Maquina m1 = new Maquina(cadenas[0], Integer.parseInt(cadenas[1]));
                 maquinas.add(m1);
@@ -20,9 +22,10 @@ public class App {
             Fabrica fabrica = new Fabrica(maquinas);
             Solucion solucionGreedy = fabrica.greedy(piezasAProducir);
             Solucion solucionBacktacking = fabrica.backtracking(piezasAProducir);
+            System.out.println("******************************************************************************");
+            System.out.println("PARAMETROS INICIALES:");
             System.out.print("Piezas a producir:");
             System.out.println(piezasAProducir);
-            System.out.println("******************************************************************************");
             System.out.print("Maquinas disponibles: ");
             System.out.println(maquinas);
             System.out.println("******************************************************************************");
@@ -43,7 +46,7 @@ public class App {
             System.out.println(solucionBacktacking.getSolucion());
             System.out.print("Cantidad de puestas en funcionamiento de procesadores con Backtracking: ");
             System.out.println(solucionBacktacking.getCantidadProcesadores());
-
+            System.out.println("******************************************************************************");
         } catch (IOException e) {
             e.printStackTrace();
         }
