@@ -9,7 +9,7 @@ public class Maquina {
 
     @Override
     public String toString() {
-        return "Maquina [nombre=" + nombre + ", piezas=" + piezas + "]";
+        return " [Maquina=" + nombre + ", piezas=" + piezas + "]";
     }
 
     public String getNombre() {
