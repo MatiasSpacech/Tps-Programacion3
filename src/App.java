@@ -17,7 +17,10 @@ public class App {
                 Maquina m1 = new Maquina(cadenas[0], Integer.parseInt(cadenas[1]));
                 maquinas.add(m1);
             }
-            System.out.println(maquinas);
+
+            Fabrica fabricaback = new Fabrica(maquinas);
+
+            System.out.println(fabricaback.AsignarMaquinas(12));
         } catch (IOException e) {
             e.printStackTrace();
         }
