@@ -1,18 +1,36 @@
-## Getting Started
+## explicación de la estrategia de resolución
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Cada nodo del árbol representa un estado parcial de solución: una lista de máquinas seleccionadas (solucionActual) y un número restante de piezas a producir (piezasRestantes).
+En cada nivel del árbol:
 
-## Folder Structure
+    Se prueba agregar una máquina más de la lista maquinas.
 
-The workspace contains two folders by default, where:
+    El algoritmo se mueve profundamente en el árbol, restando maquina.getPiezas() a piezasRestantes.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Estados finales (hojas del árbol):
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+    Cuando piezasRestantes <= 0 o cuando ya no se desea seguir explorando (por poda).
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Estados solución:
 
-## Dependency Management
+    Cuando piezasRestantes == 0, es decir, la suma exacta de piezas ha sido lograda.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+    Además, solo se guarda como solución óptima si la cantidad de máquinas usadas (solucionActual.size()) es menor que la solución actual almacenada.
+
+## Posibles podas:
+
+     Evitar combinaciones repetidas
+
+## Greedy
+
+## Los candidatos son:
+
+    Máquinas disponibles aún no seleccionadas
+
+## Estrategia de seleccion de candidatos greedy
+
+    Seleccionar la máquina con más piezas posible sin exceder tempPiezas
+
+## Puede no encontrar solución
+
+     Depende del conjunto de piezas y maquinas puede obtener solucion o no;
