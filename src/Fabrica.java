@@ -29,11 +29,13 @@ public class Fabrica {
 
     private void AsignarMaquinasGreedy(ArrayList<Maquina> candidatos, int piezas) {
         int tempPiezas = piezas;
-        while (!candidatos.isEmpty() && !solucion(solucion, piezas)) {
-            costoSolucion += 1;// consultar si va aca o dentro del otro while
-            Maquina maquinaActual = seleccionar(candidatos, tempPiezas);// mayor valor sin pasarme de total
+        while (!candidatos.isEmpty() && tempPiezas > 0/* !solucion(solucion, piezas) */) {
+            Maquina maquinaActual = seleccionar(candidatos, tempPiezas);// mayor valor sin
+            // pasarme de total
             candidatos.remove(maquinaActual);
-            while (factible(maquinaActual, tempPiezas)) {
+            int piezasDelmismoTipo = tempPiezas / maquinaActual.getPiezas();
+            for (int i = 0; i <= piezasDelmismoTipo; i++) {
+                costoSolucion += 1;
                 solucion.add(maquinaActual);
                 tempPiezas -= maquinaActual.getPiezas();
             }
@@ -41,34 +43,54 @@ public class Fabrica {
         }
     }
 
-    private boolean factible(Maquina m, int piezas) {
-        // f (m != null) {
-        if (m.getPiezas() <= piezas) {
-            return true;
-            // }
-        }
-        return false;
-    }
+    /*
+     * private void AsignarMaquinasGreedy(ArrayList<Maquina> candidatos, int piezas)
+     * {
+     * int tempPiezas = piezas;
+     * while (!candidatos.isEmpty() && !solucion(solucion, piezas)) {
+     * Maquina maquinaActual = seleccionar(candidatos, tempPiezas);// mayor valor
+     * sin pasarme de total
+     * candidatos.remove(maquinaActual);
+     * while (factible(maquinaActual, tempPiezas)) {
+     * costoSolucion += 1;// consultar si va aca o dentro del otro while
+     * solucion.add(maquinaActual); //dividir
+     * tempPiezas -= maquinaActual.getPiezas();
+     * }
+     * 
+     * }
+     * }
+     */
+    /*
+     * private boolean factible(Maquina m, int piezas) {
+     * // f (m != null) {
+     * if (m.getPiezas() <= piezas) {
+     * return true;
+     * // }
+     * }
+     * return false;
+     * }
+     */
 
     private Maquina seleccionar(ArrayList<Maquina> candidatos, int piezas) {
         Iterator<Maquina> candidatoit = candidatos.iterator();
-        boolean flag = false;
-        while (candidatoit.hasNext() && !flag) {
+        while (candidatoit.hasNext()) {
             Maquina eleccion = candidatoit.next();
             if (eleccion.getPiezas() <= piezas) {
                 return eleccion;
             }
         }
-        return null;
+        return candidatos.getFirst();
     }
 
-    private boolean solucion(ArrayList<Maquina> candidato, int piezas) {
-        int sumador = 0;
-        for (Maquina maquina : candidato) {
-            sumador += maquina.getPiezas();
-        }
-        return sumador == piezas;
-    }
+    /*
+     * private boolean solucion(ArrayList<Maquina> candidato, int piezas) {
+     * int sumador = 0;
+     * for (Maquina maquina : candidato) {
+     * sumador += maquina.getPiezas();
+     * }
+     * return sumador == piezas;
+     * }
+     */
 
     private void AsignarMaquinasBack(int piezasRestantes, ArrayList<Maquina> solucionActual) {
         costoSolucion += 1;

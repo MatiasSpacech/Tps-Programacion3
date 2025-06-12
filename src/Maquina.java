@@ -1,6 +1,6 @@
-public class Maquina {
+public class Maquina implements Comparable<Maquina> {
     private String nombre;
-    private int piezas;
+    private Integer piezas;
 
     public Maquina(String nombre, int piezas) {
         this.nombre = nombre;
@@ -26,6 +26,25 @@ public class Maquina {
 
     public void setPiezas(int piezas) {
         this.piezas = piezas;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Maquina other = (Maquina) obj;
+        if (piezas != other.piezas)
+            return false;
+        return true;
+    }
+
+    @Override
+    public int compareTo(Maquina o) {
+        return this.piezas.compareTo(o.getPiezas());
     }
 
 }
