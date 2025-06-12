@@ -91,7 +91,11 @@ public class Fabrica {
      * return sumador == piezas;
      * }
      */
-
+    /*explicación de la estrategia de resolución
+     * Cada nodo del árbol representa un estado parcial de solución: una lista de máquinas seleccionadas
+     * (solucionActual) y un número restante de piezas a producir (piezasRestantes).
+     * 
+     */
     private void AsignarMaquinasBack(int piezasRestantes, ArrayList<Maquina> solucionActual) {
         costoSolucion += 1;
         if (piezasRestantes == 0) {
@@ -111,7 +115,7 @@ public class Fabrica {
                 piezasRestantes += maquina.getPiezas();
                 solucionActual.removeLast();
             }
-        } /// evitar soluciones permutadas verificar size
+        } 
     }
 
 }
