@@ -1,10 +1,17 @@
-## explicación de la estrategia de resolución
+## Trabajo practico especial Programacion 3
+
+## Grupo 34
+
+## Spacech Eduardo Matias espacech@alumnos.exa.unicen.edu.ar
+
+## Teruggi Sergio Daniel steruggi@alumnos.exa.unicen.edu.ar
+
+## Explicación de la estrategia de resolución del Backtracking
 
 Cada nodo del árbol representa un estado parcial de solución: una lista de máquinas seleccionadas (solucionActual) y un número restante de piezas a producir (piezasRestantes).
 En cada nivel del árbol:
 
     Se prueba agregar una máquina más de la lista maquinas.
-
     El algoritmo se mueve profundamente en el árbol, restando maquina.getPiezas() a piezasRestantes.
 
 ## Estados finales (hojas del árbol):
@@ -21,7 +28,9 @@ En cada nivel del árbol:
 
      Evitar combinaciones repetidas
 
-## Greedy
+##********************\*\*\*\*********************\*\*\*\*********************\*\*\*\*********************
+
+## Explicación de la estrategia de resolución de Greedy
 
 ## Los candidatos son:
 
