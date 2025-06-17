@@ -28,7 +28,9 @@ En cada nivel del árbol:
 
      Evitar combinaciones repetidas
 
-##********************\*\*\*\*********************\*\*\*\*********************\*\*\*\*********************
+##
+
+##
 
 ## Explicación de la estrategia de resolución de Greedy
 
