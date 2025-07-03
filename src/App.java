@@ -3,8 +3,9 @@ import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        ArrayList<Maquina> maquinas = LectorTxtMaquinas.getMaquinas("TpEspecialProg3/src/entrada.txt");
-        int piezasAProducir = LectorTxtMaquinas.getPiezasAProducir("TpEspecialProg3/src/entrada.txt");
+        String ruta = "TpEspecialProg3/src/entrada.txt";
+        ArrayList<Maquina> maquinas = LectorTxtMaquinas.getMaquinas(ruta);
+        int piezasAProducir = LectorTxtMaquinas.getPiezasAProducir(ruta);
 
         FabricaBack fabricaBack = new FabricaBack(maquinas);
         Solucion solucionBacktacking = fabricaBack.backtracking(piezasAProducir);

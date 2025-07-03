@@ -27,14 +27,13 @@ public class FabricaGreedy {
 
         while (!candidato.isEmpty() && piezasRestantes > 0) {
             Maquina maquinaActual = seleccionar(candidato, piezasRestantes);
-            if (maquinaActual == null) {
-                break;
-            }
-            candidato.remove(maquinaActual);
-            int piezasDelmismoTipo = piezasRestantes / maquinaActual.getPiezas();
-            for (int i = 0; i < piezasDelmismoTipo; i++) {
-                solucion.add(maquinaActual);
-                piezasRestantes -= maquinaActual.getPiezas();
+            if (maquinaActual != null) {
+                candidato.remove(maquinaActual);
+                int piezasDelmismoTipo = piezasRestantes / maquinaActual.getPiezas();
+                for (int i = 0; i < piezasDelmismoTipo; i++) {
+                    solucion.add(maquinaActual);
+                    piezasRestantes -= maquinaActual.getPiezas();
+                }
             }
         }
         if (piezasRestantes > 0) {
@@ -42,15 +41,18 @@ public class FabricaGreedy {
         }
     }
 
-    private Maquina seleccionar(ArrayList<Maquina> candidatos, int piezas) {
+    private Maquina seleccionar(ArrayList<Maquina> candidatos, int piezasRestantes) {
         Iterator<Maquina> candidatoit = candidatos.iterator();
         while (candidatoit.hasNext()) {
             costoSolucion += 1;
-            Maquina eleccion = candidatoit.next();
-            if (eleccion.getPiezas() <= piezas) {
-                return eleccion;
+            Maquina actual = candidatoit.next();
+            if (actual.getPiezas() <= piezasRestantes) {
+                return actual;
+            } else {
+                candidatoit.remove();
             }
         }
         return null;
     }
+
 }
