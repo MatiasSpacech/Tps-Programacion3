@@ -1,16 +1,20 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class FabricaGreedy {
     private ArrayList<Maquina> maquinas;
     private ArrayList<Maquina> solucion;
     private Integer costoSolucion;
+    private HashMap<Maquina, Integer> maquinasUsadas;
 
     public FabricaGreedy(ArrayList<Maquina> maquinas) {
         this.maquinas = maquinas;
         this.solucion = new ArrayList<>();
         this.costoSolucion = 0;
+        this.maquinasUsadas = new HashMap<>();
     }
 
     public Solucion greedy(int piezas) {
@@ -18,6 +22,17 @@ public class FabricaGreedy {
         this.solucion.clear();
         Collections.sort(maquinas, Collections.reverseOrder()); // ordenamos las maquinas de mayor a menor
         AsignarMaquinasGreedy(maquinas, piezas);
+        // aca solo "desempaqueto" el hashmap para agregarlo a la lista solucion y
+        // seguir usando mi clase solucion
+        // como uso esa clase solucion tanto en el greedy como en el back, o lo
+        // "desempaqueto" aca o lo "empaqueto" en el back.
+        for (Map.Entry<Maquina, Integer> entry : maquinasUsadas.entrySet()) {
+            Maquina maquina = entry.getKey();
+            Integer cantidad = entry.getValue();
+            for (int i = 0; i < cantidad; i++) {
+                solucion.add(maquina);
+            }
+        }
         return new Solucion(solucion, costoSolucion);
     }
 
@@ -30,13 +45,18 @@ public class FabricaGreedy {
             if (maquinaActual != null) {
                 candidato.remove(maquinaActual);
                 int piezasDelmismoTipo = piezasRestantes / maquinaActual.getPiezas();
-                for (int i = 0; i < piezasDelmismoTipo; i++) {
-                    solucion.add(maquinaActual);
-                    piezasRestantes -= maquinaActual.getPiezas();
-                }
+                maquinasUsadas.put(maquinaActual, piezasDelmismoTipo); // agrego a un hashmap la maquina y la cantidad
+                                                                       // de veces que se usa
+                piezasRestantes -= maquinaActual.getPiezas() * piezasDelmismoTipo;
+                /*
+                 * for (int i = 0; i < piezasDelmismoTipo; i++) {
+                 * solucion.add(maquinaActual);
+                 * piezasRestantes -= maquinaActual.getPiezas();
+                 * }
+                 */
             }
         }
-        if (piezasRestantes > 0) {
+        if (piezasRestantes > 0) { // cuando quedan piezas restantes no llego a solucion
             solucion.clear();
         }
     }

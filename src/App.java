@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        String ruta = "TpEspecialProg3/src/entrada.txt";
+        String ruta = "src/entrada.txt";
+
         ArrayList<Maquina> maquinas = LectorTxtMaquinas.getMaquinas(ruta);
         int piezasAProducir = LectorTxtMaquinas.getPiezasAProducir(ruta);
 
